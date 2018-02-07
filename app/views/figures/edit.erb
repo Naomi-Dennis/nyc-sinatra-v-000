@@ -1,0 +1,33 @@
+<form action="/figures/save" method="post">
+  Figure Name:
+  <input id="hidden" type="hidden" value="<%= @figure.id %>" name="figure[id]" />
+  <input id="figure_name" name="figure[name]" type="text" value="<%= @figure.name %>" />
+  <br/>
+  <h4>Titles</h4>
+  <% @titles.each do | title | %>
+    <% if @figure.titles.include?(title) %>
+      <input type="checkbox" name="figure[title_ids][]" id="title_<%= title.id %>" value="<%= title.id %>" checked /><%= title.name %><br/>
+    <% else %>
+      <input type="checkbox" name="figure[title_ids][]" id="title_<%= title.id %>" value="<%= title.id %>"/><%= title.name %><br/>
+    <% end %>
+  <% end %>
+  <br/>
+  Add New Title:
+  <input type="text" name="title[name]" id="new_title" />
+  <br/>
+  <h4>Landmarks</h4>
+  <% @landmarks.each do | landmark | %>
+    <% if @figure.landmarks.include?(landmark) %>
+      <input type="checkbox" name="figure[landmark_ids][]" id="landmark_<%= landmark.id %>" value="<%= landmark.id %>" checked/><%= landmark.name %><br/>
+    <% else %>
+      <input type="checkbox" name="figure[landmark_ids][]" id="landmark_<%= landmark.id %>" value="<%= landmark.id %>"/><%= landmark.name %><br/>
+    <% end %>
+  <% end %>
+  <br/>
+  Add New Landmark:
+  <input type="text" name="landmark[name]" id="new_landmark" />
+  <br/><br/>
+  <input type="submit" id="Edit Figure" value="Edit Figure"/>
+</form>
+
+<a href="/figures">View All</a>
